@@ -13,13 +13,15 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import com.sayan.kafka.models.SimpleDataModel;
+
 @Configuration
 public class KafkaConfig {
 	
 	@Value("${kafka.boot.server}")
 	private String kafkaServer;
 
-	public ProducerFactory<String, String> getProducerFactory(){
+	public ProducerFactory<String, SimpleDataModel> getProducerFactory(){
 		Map<String, Object> configs = new HashMap<>();
 		configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
 		configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -28,7 +30,7 @@ public class KafkaConfig {
 	}
 	
 	@Bean
-	public KafkaTemplate<String, String> getKafkaTemplate(){
+	public KafkaTemplate<String, SimpleDataModel> getKafkaTemplate(){
 		return new KafkaTemplate<>(getProducerFactory());
 	}
 }

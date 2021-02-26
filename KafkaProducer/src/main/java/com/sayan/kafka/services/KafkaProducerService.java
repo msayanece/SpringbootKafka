@@ -16,7 +16,7 @@ import com.sayan.kafka.models.SimpleDataModel;
 public class KafkaProducerService {
 	
 	@Autowired
-	KafkaTemplate<String, String> kafkaTemplate;
+	KafkaTemplate<String, SimpleDataModel> kafkaTemplate;
 	
 	@Value("${kafka.topic.name}")
 	private String topicName;
